@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<extension type="component" version="3.2.0" method="upgrade">
+    <name>sistemas ans</name>
+    <creationDate>march 2021</creationDate>
+    <author>bruno marins</author>
+    <authorEmail>bruno.marins@ans.gov.br</authorEmail>
+    <authorUrl>http://www.ans.gov.br</authorUrl>
+    <copyright>Copyright Info</copyright>
+    <license>License Info</license>
+    <version>0.0.4</version>
+    <description>componente para cadastramento de ocorrências no sistema ANS</description>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+    <update> 
+        <schemas>
+            <schemapath type="mysql">sql/updates/mysql</schemapath>
+        </schemas>
+    </update>
+
+
+    <administration>
+        <menu link='index.php?option=componnet_sistemasans' >Monitoramento de sistemas da Ans</menu>
+        <files folder="admin">
+            <!-- Admin Main File Copy Section -->
+            <filename>index.html</filename>
+            <filename>controller.php</filename>
+            <!-- SQL files section -->
+            <folder>sql</folder>
+            <!-- models files section -->
+            <folder>models</folder>
+            <!-- views files section -->
+            <folder>views</folder>
+            <!-- controllers files section -->
+            <folder>controllers</folder>
+        </files>
+    </administration>
+</extension>
