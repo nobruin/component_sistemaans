@@ -7,7 +7,7 @@
     <authorUrl>http://www.ans.gov.br</authorUrl>
     <copyright>Copyright Info</copyright>
     <license>License Info</license>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
     <description>componente para cadastramento de ocorrências no sistema ANS</description>
 
     <install>
@@ -33,6 +33,7 @@
             <!-- Admin Main File Copy Section -->
             <filename>index.html</filename>
             <filename>controller.php</filename>
+            <filename>sistemasans.php</filename>
             <!-- SQL files section -->
             <folder>sql</folder>
             <!-- models files section -->
