@@ -20,7 +20,7 @@ function simOuNao($value){
 }
 
 ?>
-<form action="index.php?option=com_sistemasans&view=servicos" method="post" id="adminForm" name="adminForm">
+<form action="index.php?option=com_sistemasans&view=indisponibilidades" method="post" id="adminForm" name="adminForm">
 	<div id="j-sidebar-container" class="span2">
 		<?php echo JHtmlSidebar::render(); ?>
 	</div>
@@ -45,13 +45,16 @@ function simOuNao($value){
 				<?php echo JHtml::_('grid.sort','Status', 'published', $listDirn, $listOrder); ?>
 			</th>
 			<th width="20%">
-				<?php echo JHtml::_('grid.sort', 'Nome', 'nome', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort', 'Titulo', 'titulo', $listDirn, $listOrder); ?>
 			</th>
 			<th width="20%">
-				<?php echo JHtml::_('grid.sort', 'Externalizado', 'id', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort', 'inicio', 'inicio', $listDirn, $listOrder); ?>
+			</th>
+			<th width="20%">
+				<?php echo JHtml::_('grid.sort', 'Fim', 'fim', $listDirn, $listOrder); ?>
 			</th>
 			<th width="20%">    
-				<?php echo JHtml::_('grid.sort', 'Ativo', 'ativado', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort', 'Serviço', 'servico.nome', $listDirn, $listOrder); ?>
 			</th>
 			<th width="20%">    
 				<?php echo JHtml::_('grid.sort', 'ID', 'id', $listDirn, $listOrder); ?>
@@ -70,25 +73,28 @@ function simOuNao($value){
 			<?php 
 			if (!empty($this->items)) : ?>
 				<?php foreach ($this->items as $i => $row) : 
-					$link = JRoute::_('index.php?option=com_sistemasans&task=servico.edit&id=' . $row->id);
+					$link = JRoute::_('index.php?option=com_sistemasans&task=indisponibilidade.edit&id=' . $row->id);
 					?>
 					<tr>
 						<td>
 							<?php echo JHtml::_('grid.id', $i, $row->id); ?>
 						</td>
 						<td align="center">
-							<?php echo JHtml::_('jgrid.published', $row->published, $i, 'servico.', true, 'cb'); ?>
+							<?php echo JHtml::_('jgrid.published', $row->published, $i, 'indisponibilidade.', true, 'cb'); ?>
 						</td>
 						<td>
 							<a href="<?php echo $link; ?>" title="<?php echo "Editar Serviço" ?>">
-								<?php echo $row->nome; ?>
+								<?php echo $row->titulo; ?>
 							</a>
 						</td>
 						<td>
-							<?php echo simOuNao($row->externalizado);?>
+							<?php echo $row->inicio;?>
 						</td>
 						<td>
-							<?php echo simOuNao($row->ativado);?>
+							<?php echo $row->fim;?>
+						</td>
+						<td>
+							<?php echo $row->nome;?>
 						</td>
 						<td align="center">
 							<?php echo $row->id; ?>

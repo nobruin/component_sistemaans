@@ -11,13 +11,13 @@ CREATE TABLE IF NOT EXISTS `#__servicos`(
     PRIMARY KEY(`id`)
 );
  
-CREATE TABLE IF NOT EXISTS  `#__indisponibilidade`(
+CREATE TABLE IF NOT EXISTS  `#__indisponibilidades`(
     `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Chave primaria da indisponibilidade',
     `id_servico` INT(11) NOT NULL, 
     `titulo` varchar(255) NOT NULL,
     `descricao` varchar(500) NOT NULL,
     `inicio` TIMESTAMP NOT NULL,
-    `fim` TIMESTAMP NULL ,
+    `fim` TIMESTAMP NOT NULL ,
     `published` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'Indica se parecer tecnico está publicada (1) ou não (0).',
     `created` datetime NOT NULL COMMENT 'Data de criação', 
     `created_by` int(11) NOT NULL COMMENT 'Id do usuário criador',

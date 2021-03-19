@@ -2,7 +2,7 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-class SistemasAnsModelServicos extends JModelList
+class SistemasAnsModelIndisponibilidades extends JModelList
 {
     /**
 	 * Constructor.
@@ -16,9 +16,9 @@ class SistemasAnsModelServicos extends JModelList
 		if (empty($config['filter_fields']))
 		{
 			$config['filter_fields'] = array(
-				'id',
-				'name',
-				'published'
+				'i.id',
+				'i.titulo',
+				'i.published'
 			);
 		}
 
@@ -31,8 +31,9 @@ class SistemasAnsModelServicos extends JModelList
 		$query = $db->getQuery(true);
 
 		// Create the base select statement.
-		$query->select('*')
-                ->from($db->quoteName('#__servicos'));
+		$query->select('i.*, s.nome')
+                ->from($db->quoteName('#__indisponibilidades', 'i'))
+				->join('INNER', $db->quoteName('#__servicos','s'). " ON  ".$db->quoteName('i.id_servico'). " = ".$db->quoteName('s.id'));
 
                 	// Filter: like / search
 		$search = $this->getState('filter.search');
@@ -40,7 +41,7 @@ class SistemasAnsModelServicos extends JModelList
 		if (!empty($search))
 		{
 			$like = $db->quote('%' . $search . '%');
-			$query->where('nome LIKE ' . $like);
+			$query->where('titulo LIKE ' . $like);
 		}
 
 		// Filter by published state
@@ -48,11 +49,11 @@ class SistemasAnsModelServicos extends JModelList
 
 		if (is_numeric($published))
 		{
-			$query->where('published = ' . (int) $published);
+			$query->where('i.published = ' . (int) $published);
 		}
 		elseif ($published === '')
 		{
-			$query->where('(published IN (0, 1))');
+			$query->where('(i.published IN (0, 1))');
 		}
 
 		// Add the list ordering clause.

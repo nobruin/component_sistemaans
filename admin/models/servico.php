@@ -11,7 +11,7 @@ class SistemasAnsModelServico extends JModelAdmin
 
    public function getForm($data = array(), $loadData = true){
        $form = $this->loadForm(
-           'com_sistemasans.sistemasAns',
+           'com_sistemasans.sistemasAns.servico',
            'servico',
            array(
                'control' => 'jform',

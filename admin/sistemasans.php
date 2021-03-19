@@ -2,6 +2,11 @@
 defined('_JEXEC') or die('Restricted access');
 JHtml::_('behavior.tabstate');
 
+
+// Require helper file
+JLoader::register('MenuHelper', JPATH_COMPONENT . '/helpers/menuhelper.php');
+
+
 // Get an instance of the controller prefixed by HelloWorld
 $controller = JControllerLegacy::getInstance('SistemasAns');
 

@@ -1,19 +1,17 @@
 <?php
 
-class SistemasAnsViewServicos extends JViewLegacy
+class sistemasansViewindisponibilidades extends JViewLegacy
 {
 	function display($tpl = null)
 	{
 		$app = JFactory::getApplication();
-		$context = "sistemasans.list.admin.servicos";
-
-		//die('ok');
+		$context = "sistemasans.list.admin.indisponibilidades";
 
 		$this->items		= $this->get('Items');
 		$this->pagination	= $this->get('Pagination');
 		$this->state 		= $this->get('State');	
 		$this->state			= $this->get('State');
-		$this->filter_order 	= $app->getUserStateFromRequest($context.'filter_order', 'filter_order', 'nome', 'cmd');
+		$this->filter_order 	= $app->getUserStateFromRequest($context.'filter_order', 'filter_order', 'i.titulo', 'cmd');
 		$this->filter_order_Dir = $app->getUserStateFromRequest($context.'filter_order_Dir', 'filter_order_Dir', 'asc', 'cmd');
 		$this->filterForm    	= $this->get('FilterForm');	
 		$this->activeFilters 	= $this->get('ActiveFilters');
@@ -29,7 +27,7 @@ class SistemasAnsViewServicos extends JViewLegacy
 		$errors = $this->get('Errors');
 		$this->addToolBar();
 
-		MenuHelper::addSubmenu('servicos');
+		MenuHelper::addSubmenu('indisponibilidades');
 
 		parent::display($tpl);
 		// Set the document
@@ -39,7 +37,7 @@ class SistemasAnsViewServicos extends JViewLegacy
 	protected function addToolBar()
 	{
 
-		$title = JText::_('CADASTRO DE SERVIÇOS:');
+		$title = JText::_('CADASTRO DE INDISPONIBILIDADES:');
 
 		if ($this->pagination->total)
 		{
@@ -47,11 +45,11 @@ class SistemasAnsViewServicos extends JViewLegacy
 		}
 
 
-		JToolBarHelper::title($title, 'servico');
+		JToolBarHelper::title($title, 'Indisponibilidades');
 
-		JToolbarHelper::addNew('servico.add');
-		JToolbarHelper::editList('servico.edit');
-		JToolbarHelper::deleteList('', 'servico.delete');
+		JToolbarHelper::addNew('indisponibilidade.add');
+		JToolbarHelper::editList('indisponibilidade.edit');
+		JToolbarHelper::deleteList('', 'indisponibilidade.delete');
 
 	}
 

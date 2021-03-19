@@ -10,13 +10,14 @@
 // No direct access
 defined('_JEXEC') or die('Restricted access');
 
-
 JHtml::_('behavior.formvalidator');
 JHtml::_('behavior.keepalive');
 JHtml::_('formbehavior.chosen', 'select');
 
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_sistemasans&layout=edit&id=' . (int) $this->item->id); ?>"
+
+<script type="text/javascript" src="/administrator/components/com_sistemasans/assets/js/indisponibilidade.js"></script>
+<form action="<?php echo JRoute::_('index.php?option=com_sistemasans&view=indisponibilidade&layout=edit&id=' . (int) $this->item->id); ?>"
     method="post" name="adminForm" id="adminForm" class="form-validate">
     <div class="form-horizontal">
         <fieldset class="adminform">
@@ -24,13 +25,13 @@ JHtml::_('formbehavior.chosen', 'select');
                 <div class="span6">
                     <?php 
                         foreach($this->form->getFieldset() as $field) {
-                            echo $field->renderField();        
+                            echo $field->renderField(); 
                         }
                     ?>
                 </div>
             </div>
         </fieldset>
     </div>
-    <input type="hidden" name="task" value="servico.edit" />
+    <input type="hidden" name="task" value="indisponibilidade.edit" />
     <?php echo JHtml::_('form.token'); ?>
 </form>
