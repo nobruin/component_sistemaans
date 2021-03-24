@@ -7,7 +7,7 @@
     <authorUrl>http://www.ans.gov.br</authorUrl>
     <copyright>Copyright Info</copyright>
     <license>License Info</license>
-    <version>0.0.5</version>
+    <version>0.0.7</version>
     <description>componente para cadastramento de ocorrências no sistema ANS</description>
 
     <install>
@@ -26,6 +26,15 @@
         </schemas>
     </update>
 
+    <files folder="site">
+		<filename>index.html</filename>
+        <filename>controller.php</filename>
+        <filename>sistemasans.php</filename>
+        <folder>assets</folder>
+        <folder>controllers</folder>
+        <folder>views</folder>
+	</files>
+
 
     <administration>
         <menu link='index.php?option=componnet_sistemasans' >Monitoramento de sistemas da Ans</menu>
@@ -34,16 +43,13 @@
             <filename>index.html</filename>
             <filename>controller.php</filename>
             <filename>sistemasans.php</filename>
-            
             <folder>assets</folder>
             <folder>controllers</folder>
             <folder>helpers</folder>
             <folder>sql</folder>
             <folder>models</folder>
             <folder>tables</folder>
-            <folder>views</folder>
-            
-
+            <folder>views</folder>            
         </files>
     </administration>
 </extension>
