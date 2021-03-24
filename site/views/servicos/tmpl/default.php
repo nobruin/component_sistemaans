@@ -9,99 +9,107 @@
  
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
-
-JHtml::_('formbehavior.chosen', 'select');
-
-$listOrder     = $this->escape($this->filter_order);
-$listDirn      = $this->escape($this->filter_order_Dir);
-
-function simOuNao($value){
-	return $value == 1 ? "sim" : "Não";
-}
-
 ?>
-<form action="index.php?option=com_sistemasans&view=servicos" method="post" id="adminForm" name="adminForm">
-	<div id="j-sidebar-container" class="span2">
-		<?php echo JHtmlSidebar::render(); ?>
-	</div>
-	<div id="j-main-container" class="span10">
 
-	<div class="row-fluid">
-		<div class="span6">
-			<?php
-				echo JLayoutHelper::render(
-					'joomla.searchtools.default',
-					array('view' => $this)
-				);
-			?>
+<link rel="stylesheet" href="/components/com_sistemasans/assets/css/style.css" type="text/css"></link>
+<script type="text/javascript" src="/components/com_sistemasans/assets/js/sistemasans.js"></script>
+
+<script type="text/javascript">
+		/* ativador do tooltip */
+		$(function () { $('[data-toggle="tooltip"]').tooltip() })
+			//window.setTimeout(function () {
+			window.location.reload();
+		}, 1000);
+</script>
+
+<div class="container-fluid">
+			<div class="col-sm-12 col-md-12 cl-lg-12">
+
+				<!-- MENU DE NAVEGAÇÃO -->
+
+				<ul class="nav nav-tabs">
+					<li class="active">
+						<a href="#sistemas" data-toggle="tab" class="nav-link">Status</a>
+					</li>
+					<li>
+						<a href="#historico" data-toggle="tab" class="nav-link">Histórico</a>
+					</li>
+				</ul>
+
+				<div class="tab-content">
+					<div class=" tab-pane active" id="sistemas">
+						<div class="row" id="listaEmpresas">
+						<?php foreach ($this->servicos as $item): ?>
+							<div class="col-sm-3 col-md-3 cl-lg-3">
+									<div class="conteudo">
+										<p class="sistema-nome"><?php echo $item->nome ?></p>
+										<p class="sistema-status <?php echo $item->ativado ? "disponivel" : "indisponivel"; ?> "><?php echo $item->ativado ? "Disponível" : "Indisponível"; ?></p>
+									</div>
+							</div>
+						<?php endforeach; ?>
+						</div>
+					</div>
+
+					<!-- HISTÓRICO -->
+
+					<div class="tab-pane" id="historico">
+						<div class="row">
+							<div class="col-sm-12 col-md-12 cl-lg-12">
+
+								<div class="table-responsive tabela">
+									<h2>Períodos de indisponibilidade</h2>
+
+									<table class="table table-bordered table-hover">	
+
+										<thead class="thead-ans">
+											<th style="width:25%">Serviço</th>
+											<th style="width:25%">&#9660; Data de início</th>
+											<th style="width:25%">Data de término</th>
+											<th style="width:25%">Total em minutos</th>
+											
+										</thead>
+										<?php foreach($this->indisponibilidades as $item) :?>
+										
+											<tr>
+												<td><?php echo $item->nome; ?></td>
+												<td><?php echo $item->inicio; ?></td>
+												<td><?php echo $item->fim; ?></td>
+												<td><?php echo $item->totalMinutos; ?></td>
+											</tr>
+
+										<? endforeach; ?>
+									</table>
+								</div>
+
+								<div class="paginacao">
+
+									<nav aria-label="Page navigation">
+										<ul class="pagination">
+											<li>
+												<a href="#" aria-label="Previous">
+													<span aria-hidden="true">&laquo;</span>
+												</a>
+											</li>
+											<li class="active"><a href="#">1</a></li>
+											<li><a href="#">2</a></li>
+											<li><a href="#">3</a></li>
+											<li><a href="#">4</a></li>
+											<li><a href="#">5</a></li>
+											<li>
+												<a href="#" aria-label="Next">
+													<span aria-hidden="true">&raquo;</span>
+												</a>
+											</li>
+										</ul>
+									</nav>
+									<p>Exibindo 1 de 5 página(s) - 55 resultados</p>
+								</div>
+								
+							</div>
+						</div>
+
+					</div>  <!-- fim do histórico -->
+				</div> <!-- fim do tab-content -->
+
+			</div>
 		</div>
-	</div>
-	<table class="table table-striped table-hover">
-		<tr>	
-			<th width="2%">
-				<?php echo JHtml::_('grid.checkall'); ?>
-			</th>
-			<th >
-				<?php echo JHtml::_('grid.sort','Status', 'published', $listDirn, $listOrder); ?>
-			</th>
-			<th width="20%">
-				<?php echo JHtml::_('grid.sort', 'Nome', 'nome', $listDirn, $listOrder); ?>
-			</th>
-			<th width="20%">
-				<?php echo JHtml::_('grid.sort', 'Externalizado', 'id', $listDirn, $listOrder); ?>
-			</th>
-			<th width="20%">    
-				<?php echo JHtml::_('grid.sort', 'Ativo', 'ativado', $listDirn, $listOrder); ?>
-			</th>
-			<th width="20%">    
-				<?php echo JHtml::_('grid.sort', 'ID', 'id', $listDirn, $listOrder); ?>
-			</th>
-
-		</tr>
-		</thead>
-		<tfoot>
-			<tr>
-				<td colspan="5">
-					<?php echo $this->pagination->getListFooter(); ?>
-				</td>
-			</tr>
-		</tfoot>
-		<tbody>
-			<?php 
-			if (!empty($this->items)) : ?>
-				<?php foreach ($this->items as $i => $row) : 
-					$link = JRoute::_('index.php?option=com_sistemasans&task=servico.edit&id=' . $row->id);
-					?>
-					<tr>
-						<td>
-							<?php echo JHtml::_('grid.id', $i, $row->id); ?>
-						</td>
-						<td align="center">
-							<?php echo JHtml::_('jgrid.published', $row->published, $i, 'servico.', true, 'cb'); ?>
-						</td>
-						<td>
-							<a href="<?php echo $link; ?>" title="<?php echo "Editar Serviço" ?>">
-								<?php echo $row->nome; ?>
-							</a>
-						</td>
-						<td>
-							<?php echo simOuNao($row->externalizado);?>
-						</td>
-						<td>
-							<?php echo simOuNao($row->ativado);?>
-						</td>
-						<td align="center">
-							<?php echo $row->id; ?>
-						</td>
-					</tr>
-				<?php endforeach; ?>
-			<?php endif; ?>
-		</tbody>
-	</table>
-	<input type="hidden" name="task" value=""/>
-	<input type="hidden" name="boxchecked" value="0"/>
-	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>"/>
-	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>"/>
-	<?php echo JHtml::_('form.token'); ?>
-</form>
-</div>
