@@ -7,7 +7,7 @@
     <authorUrl>http://www.ans.gov.br</authorUrl>
     <copyright>Copyright Info</copyright>
     <license>License Info</license>
-    <version>0.0.8</version>
+    <version>0.0.9</version>
     <description>componente para cadastramento de ocorrências no sistema ANS</description>
 
     <install>

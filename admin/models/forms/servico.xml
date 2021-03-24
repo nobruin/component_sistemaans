@@ -13,7 +13,6 @@
 				size="40"
 				class="inputbox"
 				default=""
-				validate="nome"
 				required="true"
 				/>
         <field
